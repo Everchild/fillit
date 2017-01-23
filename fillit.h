@@ -19,13 +19,26 @@
 
 # define MAX_TETRIMINOS 26
 # define MAX_CHARACTERS 545
-# define MAX_HASHTAG_PER_TETRI 4
+# define HASHTAG_PER_TETRI 4
 # define TETRI_SIZE 20
 
 # define E_SUCCESS 1
 # define FAILED_TO_OPEN -1
-# define NON_VALID_FILE -2
+# define INVALID_FILE -2
 # define FAILED_TO_MALLOC -3
+
+typedef enum		e_type
+{
+	ALL_TYPES
+}					t_type;
+
+typedef struct		s_tetri
+{
+	char			*str;
+	int				nb_hashtags;
+	int				nb_links;
+	t_type			type;
+}					t_tetri;
 
 typedef struct		s_env
 {

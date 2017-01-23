@@ -37,9 +37,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
+	make -C $(LIB_DIR) clean
 	rm -f $(OBJ)
 
 fclean: clean
+	make -C $(LIB_DIR) fclean
 	rm -f $(NAME)
 
 re: fclean all
