@@ -26,7 +26,7 @@ static void			register_tetris(t_env *env)
 	{
 		if (env->file[i])
 		{
-			env->tetris[j] = ft_strndup(env->file + i, TETRI_SIZE);
+			env->tetris[j].str = ft_strndup(env->file + i, TETRI_SIZE);
 			i += TETRI_SIZE;
 			if (env->file[i] && env->file[i] != '\n')
 				ft_exit("error", INVALID_FILE);
@@ -36,58 +36,65 @@ static void			register_tetris(t_env *env)
 	}
 }
 
-/*static int			check_links(char *tetri, int index)
+static int			check_links(char *tetri, int index)
 {
-	tetri += index;
-	return (6);
-}*/
+	int				ret;
 
-static void			check_tetris(t_env *env)
+	ret = 0;
+	if (tetri[index - 5] && tetri[index - 5] == '#')
+		ret++;
+	if (tetri[index - 1] && tetri[index - 1] == '#')
+		ret++;
+	if (tetri[index + 1] && tetri[index + 1] == '#')
+		ret++;
+	if (tetri[index + 5] && tetri[index + 5] == '#')
+		ret++;
+	return (ret);
+}
+
+static void			check_tetris(t_tetri tetri)
 {
 	int				i;
-	int				j;
-	t_tetri			tetri;
 
 	i = 0;
-	while (env->tetris && env->tetris[i])
+	while (tetri.str[i])
 	{
-		j = 0;
-		tetri.str = env->tetris[i];
-		tetri.nb_hashtags = 0;
-		tetri.nb_links = 0;
-		while (tetri.str[j])
+		if (tetri.str[i] == '#')
 		{
-			if (tetri.str[j] == '#')
-			{
-				tetri.nb_hashtags++;
-//				tetri.nb_links += check_links(env->tetris[i], j);
-				tetri.nb_links = 6; //temporary
-			}
-			else if (tetri.str[j] == '\n')
-			{
-				if (j != 4 && j != 9 && j != 14 && j != 19)
-					ft_exit("error", INVALID_FILE);
-			}
-			else if (tetri.str[j] != '.')
-				ft_exit("error", INVALID_FILE);
-			j++;
+			tetri.nb_hashtags++;
+			tetri.nb_links += check_links(tetri.str, i);
 		}
-		if (!(tetri.nb_hashtags == HASHTAG_PER_TETRI && (tetri.nb_links == 6 ||
-						tetri.nb_links == 8)))
+		else if (tetri.str[i] == '\n')
+		{
+			if (i != 4 && i != 9 && i != 14 && i != 19)
+				ft_exit("error", INVALID_FILE);
+		}
+		else if (tetri.str[i] != '.')
 			ft_exit("error", INVALID_FILE);
 		i++;
 	}
+	if (!(tetri.nb_hashtags == HASHTAG_PER_TETRI && (tetri.nb_links == 6 ||
+		tetri.nb_links == 8)))
+		ft_exit("error", INVALID_FILE);
 }
 
 void				parsing_tetris(t_env *env)
-{	int i = 0;
+{
+	int				i;
+
+	i = 0;
 	register_tetris(env);
-	check_tetris(env);
-	while (env->tetris && env->tetris[i])
+	while (env->tetris[i].str)
 	{
-		ft_putstr(env->tetris[i]);
+		check_tetris(env->tetris[i]);
 		i++;
-		if (env->tetris[i])
+	}
+	i = 0;
+	while (env->tetris[i].str)
+	{
+		ft_putstr(env->tetris[i].str);
+		i++;
+		if (env->tetris[i].str)
 			ft_putchar('\n');
 	}
 }

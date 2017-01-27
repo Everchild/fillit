@@ -23,7 +23,9 @@ static void			init_env(t_env *env, char *file)
 	ft_bzero(env->file, MAX_CHARACTERS + 1);
 	while (i <= MAX_TETRIMINOS)
 	{
-		env->tetris[i] = NULL;
+		env->tetris[i].str = NULL;
+		env->tetris[i].nb_hashtags = 0;
+		env->tetris[i].nb_links = 0;
 		i++;
 	}
 }
