@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -26,8 +26,13 @@ static void			init_env(t_env *env, char *file)
 		env->tetris[i].str = NULL;
 		env->tetris[i].nb_hashtags = 0;
 		env->tetris[i].nb_links = 0;
+		env->tetris[i].type.type = TT_COUNT;
+		env->tetris[i].type.place_tetri = NULL;
 		i++;
 	}
+	env->nb_tetris = 0;
+	env->map = NULL;
+	env->side = 0;
 }
 
 static void			destroy_env(t_env *env)
@@ -40,6 +45,7 @@ static void			destroy_env(t_env *env)
 		ft_memdel((void **)&(env->tetris[i]));
 		i++;
 	}
+	ft_memdel((void **)&(env->map));
 }
 
 int					main(int argc, char **argv)

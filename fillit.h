@@ -22,6 +22,10 @@
 # define HASHTAG_PER_TETRI 4
 # define TETRI_SIZE 20
 
+# define TETRI_PLACED 4
+# define MAP_TOO_SMALL 3
+# define INVALID_PLACEMENT 2
+
 # define E_SUCCESS 1
 # define FAILED_TO_OPEN -1
 # define INVALID_FILE -2
@@ -51,18 +55,19 @@ typedef enum		e_type_tetri
 	TT_COUNT
 }					t_type_tetri;
 
-typedef struct		s_apply_tetri
+typedef struct		s_place_type
 {
 	t_type_tetri	type;
-	void			(*place_tetri)(t_type_tetri);
-}					t_apply_tetri;
+	int				(*place_tetri)(char *, int, char c, int side);
+}					t_place_type;
 
 typedef struct		s_tetri
 {
 	char			*str;
 	int				nb_hashtags;
 	int				nb_links;
-	t_type_tetri	type;
+	t_place_type	type;
+	char			letter;
 }					t_tetri;
 
 typedef struct		s_env
@@ -70,8 +75,31 @@ typedef struct		s_env
 	int				fd;
 	char			file[MAX_CHARACTERS + 1];
 	t_tetri			tetris[MAX_TETRIMINOS + 1];
+	int				nb_tetris;
+	char			*map;
+	int				side;
 }					t_env;
 
 void				parsing_tetris(t_env *env);
+void				apply_type(char *str, t_place_type tetri);
+int					place_horiz_i(char *map, int index, char c, int side);
+int					place_classic_i(char *map, int index, char c, int side);
+int					place_classic_t(char *map, int index, char c, int side);
+int					place_rev_t(char *map, int index, char c, int side);
+int					place_left_t(char *map, int index, char c, int side);
+int					place_right_t(char *map, int index, char c, int side);
+int					place_classic_j(char *map, int index, char c, int side);
+int					place_right_j(char *map, int index, char c, int side);
+int					place_rev_j(char *map, int index, char c, int side);
+int					place_left_j(char *map, int index, char c, int side);
+int					place_classic_l(char *map, int index, char c, int side);
+int					place_rev_l(char *map, int index, char c, int side);
+int					place_right_l(char *map, int index, char c, int side);
+int					place_left_l(char *map, int index, char c, int side);
+int					place_square(char *map, int index, char c, int side);
+int					place_laid_s(char *map, int index, char c, int side);
+int					place_up_s(char *map, int index, char c, int side);
+int					place_laid_z(char *map, int index, char c, int side);
+int					place_up_z(char *map, int index, char c, int side);
 
 #endif
