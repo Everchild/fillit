@@ -30,7 +30,7 @@ ft_strdel.c ft_strclr.c ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c \
 ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strcjoin.c ft_strtrim.c \
 ft_strsplit.c ft_itoa.c ft_strrev.c ft_abs.c ft_pow.c ft_exit.c ft_isalpha.c \
 ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_tolower.c ft_toupper.c \
-get_next_line.c
+get_next_line.c \ ft_sqrt.c
 OBJ = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC = gcc

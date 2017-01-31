@@ -80,8 +80,9 @@ typedef struct		s_env
 	int				side;
 }					t_env;
 
-void				parsing_tetris(t_env *env);
 void				apply_type(char *str, t_place_type tetri);
+void				parsing_tetris(t_env *env);
+void				fillit(t_env *env);
 int					place_horiz_i(char *map, int index, char c, int side);
 int					place_classic_i(char *map, int index, char c, int side);
 int					place_classic_t(char *map, int index, char c, int side);

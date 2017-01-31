@@ -19,7 +19,7 @@ OBJ_DIR = ./obj
 LIB_DIR = ./libft
 LIB_INC = $(LIB_DIR)
 
-SRC = check_type.c main.c parsing_tetris.c place_tetris_ij.c place_tetris_il.c place_tetris_ot.c place_tetris_sz.c
+SRC = check_type.c fillit.c main.c parsing_tetris.c place_tetris_ij.c place_tetris_il.c place_tetris_ot.c place_tetris_sz.c
 OBJ = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC = gcc

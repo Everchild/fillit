@@ -132,6 +132,7 @@ void				ft_strrev(char **s);
 
 long int			ft_abs(int n);
 long int			ft_pow(int n, int pow);
+int					ft_sqrt(int nb_hashtags);
 
 /*
 ** others
