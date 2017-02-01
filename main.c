@@ -14,25 +14,25 @@
 
 static void			init_all_types(t_place_type all_types[TT_COUNT])
 {
-	all_types = { { TT_HORIZ_I, place_horiz_i },
-	{ TT_CLASSIC_I, place_classic_i },
-	{ TT_CLASSIC_T, place_classic_t },
-	{ TT_REV_T, place_rev_t },
-	{ TT_LEFT_T, place_left_t },
-	{ TT_RIGHT_T, place_right_t },
-	{ TT_CLASSIC_J, place_classic_j },
-	{ TT_RIGHT_J, place_right_j },
-	{ TT_REV_J, place_rev_j },
-	{ TT_LEFT_J, place_left_j },
-	{ TT_CLASSIC_L, place_classic_l },
-	{ TT_REV_L, place_rev_l },
-	{ TT_RIGHT_L, place_right_l },
-	{ TT_LEFT_L, place_left_l },
-	{ TT_SQUARE, place_square },
-	{ TT_LAID_S, place_laid_s },
-	{ TT_UP_S, place_up_s },
-	{ TT_LAID_Z, place_laid_z },
-	{ TT_UP_Z, place_up_z } };
+	all_types = { { TT_HORIZ_I, check_horiz_i, place_horiz_i },
+	{ TT_CLASSIC_I, check_classic_i, place_classic_i },
+	{ TT_CLASSIC_T, check_classic_t, place_classic_t },
+	{ TT_REV_T, check_rev_t, place_rev_t },
+	{ TT_LEFT_T, check_left_t, place_left_t },
+	{ TT_RIGHT_T, check_right_t, place_right_t },
+	{ TT_CLASSIC_J, check_classic_j, place_classic_j },
+	{ TT_RIGHT_J, check_right_j, place_right_j },
+	{ TT_REV_J, check_rev_j, place_rev_j },
+	{ TT_LEFT_J, check_left_j, place_left_j },
+	{ TT_CLASSIC_L, check_classic_l, place_classic_l },
+	{ TT_REV_L, check_rev_l, place_rev_l },
+	{ TT_RIGHT_L, check_right_l, place_right_l },
+	{ TT_LEFT_L, check_left_l, place_left_l },
+	{ TT_SQUARE, check_square, place_square },
+	{ TT_LAID_S, check_laid_s, place_laid_s },
+	{ TT_UP_S, check_up_s, place_up_s },
+	{ TT_LAID_Z, check_laid_z, place_laid_z },
+	{ TT_UP_Z, check_up_z, place_up_z } };
 }
 
 static void			init_env(t_env *env, char *file)
@@ -80,7 +80,7 @@ int					main(int argc, char **argv)
 	{
 		init_env(&env, argv[1]);
 		parsing_tetris(&env);
-//		fillit(&env);
+		fillit(&env);
 		destroy_env(&env);
 	}
 	else

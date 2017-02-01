@@ -36,6 +36,24 @@ static void			register_tetris(t_env *env)
 	}
 }
 
+static void			apply_type(t_env *env, t_tetri tetri)
+{
+	int				i;
+
+	i = 0;
+	while (i < TT_COUNT)
+	{
+		if (env->all_types[i].check_type(tetri.str))
+		{
+			tetri.type.type = env->all_types[i].type;
+			tetri.type.place_tetri = env->all_types[i].place_tetri;
+			return ;
+		}
+		i++;
+	}
+	ft_exit("error", INVALID_FILE);
+}
+
 static int			check_links(char *tetri, int index)
 {
 	int				ret;
@@ -76,7 +94,7 @@ static void			check_tetri(t_env *env, t_tetri tetri)
 	if (!(tetri.nb_hashtags == HASHTAG_PER_TETRI && (tetri.nb_links == 6 ||
 		tetri.nb_links == 8)))
 		ft_exit("error", INVALID_FILE);
-	apply_type(env, tetri.str, tetri.type);
+	apply_type(env, tetri);
 }
 
 void				parsing_tetris(t_env *env)

@@ -15,6 +15,12 @@
 
 # include <string.h>
 
+typedef enum		e_bool
+{
+	FALSE,
+	TRUE
+}					t_bool;
+
 /*
 ** libprint
 */

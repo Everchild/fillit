@@ -58,6 +58,7 @@ typedef enum		e_type_tetri
 typedef struct		s_place_type
 {
 	t_type_tetri	type;
+	t_bool			(*check_type)(char *);
 	int				(*place_tetri)(char *, int, char c, int side);
 }					t_place_type;
 
@@ -84,6 +85,25 @@ typedef struct		s_env
 void				apply_type(t_env *env, char *str, t_place_type tetri);
 void				parsing_tetris(t_env *env);
 void				fillit(t_env *env);
+t_bool				check_horiz_i(char *tetri);
+t_bool				check_classic_i(char *tetri);
+t_bool				check_classic_t(char *tetri);
+t_bool				check_rev_t(char *tetri);
+t_bool				check_left_t(char *tetri);
+t_bool				check_right_t(char *tetri);
+t_bool				check_classic_j(char *tetri);
+t_bool				check_right_j(char *tetri);
+t_bool				check_rev_j(char *tetri);
+t_bool				check_left_j(char *tetri);
+t_bool				check_classic_l(char *tetri);
+t_bool				check_rev_l(char *tetri);
+t_bool				check_right_l(char *tetri);
+t_bool				check_left_l(char *tetri);
+t_bool				check_square(char *tetri);
+t_bool				check_laid_s(char *tetri);
+t_bool				check_up_s(char *tetri);
+t_bool				check_laid_z(char *tetri);
+t_bool				check_up_z(char *tetri);
 int					place_horiz_i(char *map, int index, char c, int side);
 int					place_classic_i(char *map, int index, char c, int side);
 int					place_classic_t(char *map, int index, char c, int side);
