@@ -52,7 +52,7 @@ static int			check_links(char *tetri, int index)
 	return (ret);
 }
 
-static void			check_tetri(t_tetri tetri)
+static void			check_tetri(t_env *env, t_tetri tetri)
 {
 	int				i;
 
@@ -76,7 +76,7 @@ static void			check_tetri(t_tetri tetri)
 	if (!(tetri.nb_hashtags == HASHTAG_PER_TETRI && (tetri.nb_links == 6 ||
 		tetri.nb_links == 8)))
 		ft_exit("error", INVALID_FILE);
-	apply_type(tetri.str, tetri.type);
+	apply_type(env, tetri.str, tetri.type);
 }
 
 void				parsing_tetris(t_env *env)
@@ -89,7 +89,7 @@ void				parsing_tetris(t_env *env)
 	register_tetris(env);
 	while (env->tetris[i].str)
 	{
-		check_tetri(env->tetris[i]);
+		check_tetri(env, env->tetris[i]);
 		env->tetris[i].letter = letter;
 		env->nb_tetris++;
 		letter++;

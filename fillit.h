@@ -78,9 +78,10 @@ typedef struct		s_env
 	int				nb_tetris;
 	char			*map;
 	int				side;
+	t_place_type	all_types[TT_COUNT];
 }					t_env;
 
-void				apply_type(char *str, t_place_type tetri);
+void				apply_type(t_env *env, char *str, t_place_type tetri);
 void				parsing_tetris(t_env *env);
 void				fillit(t_env *env);
 int					place_horiz_i(char *map, int index, char c, int side);
