@@ -12,7 +12,7 @@
 
 #include <fillit.h>
 
-static void			ft_create_map(t_env *env)
+/*static void			ft_create_map(t_env *env)
 {
 	char			*map;
 	int				side;
@@ -33,9 +33,38 @@ static void			ft_create_map(t_env *env)
 	}
 	map[i] = '\0';
 	return (map);
-}
+}*/
 
 void				fillit(t_env *env)
+// sert uniquement à afficher les tetris avec leurs lettres, tu peux tout supprimer si besoin
 {
-	ft_create_map(env);
+//	ft_create_map(env);
+	int				i;
+	int				j;
+	t_tetri			tetri;
+	char			*str;
+	int				index;
+
+	i = 0;
+	while (i < env->nb_tetris)
+	{
+		tetri = env->tetris[i];
+		str = ft_memalloc(sizeof(char) * (20 + 1));
+		j = 0;
+		while (j < 20)
+		{
+			str[j] = '.';
+			if (j == 4 || j == 9 || j == 14 || j == 19)
+				str[j] = '\n';
+			j++;
+		}
+		index = 0;
+		while (tetri.type.place_tetri(str, index, tetri.letter, 4) == INVALID_PLACEMENT)
+			index++;
+		ft_putstr(str);
+		i++;
+		if (i < env->nb_tetris)
+			ft_putchar('\n');
+		ft_memdel((void **)&str);
+	}
 }

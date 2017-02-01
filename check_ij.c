@@ -1,25 +1,41 @@
 #include <fillit.h>
 
-void				apply_type(t_env *env, char *str, t_place_type tetri)
+t_bool				check_horiz_i(char *str)
 {
-	int				i;
-
-	i = 0;
 	while (*str != '#')
 		str++;
-	if (*str + 1 == '#' && *str + 5 == '#')
-	{
+	return ((str + 1) && (str + 2) && (str + 3) && *(str + 1) == '#'
+		&& *(str + 2) == '#' && *(str + 3) == '#');
+}
+
+t_bool				check_classic_j(char *str)
+{
+	while (*str != '#')
 		str++;
-		if ()
-	}
-	else if (*str + 1 == '#')
-	else if (*str + 2 == '#')
-	else
-		ft_exit("error", INVALID_FILE);
-	while (i < TT_COUNT)
-	{
-		if (env->all_types[i].type == tetri.type)
-			tetri.place_tetri = env->all_types[i].place_tetri;
-		i++;
-	}
+	return ((str + 5) && (str + 9) && (str + 10) && *(str + 5) == '#'
+		&& *(str + 9) == '#' && *(str + 10) == '#');
+}
+
+t_bool				check_right_j(char *str)
+{
+	while (*str != '#')
+		str++;
+	return ((str + 5) && (str + 6) && (str + 7) && *(str + 5) == '#'
+		&& *(str + 6) == '#' && *(str + 7) == '#');
+}
+
+t_bool				check_rev_j(char *str)
+{
+	while (*str != '#')
+		str++;
+	return ((str + 1) && (str + 5) && (str + 10) && *(str + 1) == '#'
+		&& *(str + 5) == '#' && *(str + 10) == '#');
+}
+
+t_bool				check_left_j(char *str)
+{
+	while (*str != '#')
+		str++;
+	return ((str + 1) && (str + 2) && (str + 7) && *(str + 1) == '#'
+		&& *(str + 2) == '#' && *(str + 3) == '#');
 }

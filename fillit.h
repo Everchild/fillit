@@ -55,6 +55,9 @@ typedef enum		e_type_tetri
 	TT_COUNT
 }					t_type_tetri;
 
+typedef t_bool		(*t_check_type_fn)(char *);
+typedef int			(*t_place_type_fn)(char *, int, char c, int side);
+
 typedef struct		s_place_type
 {
 	t_type_tetri	type;
@@ -82,7 +85,6 @@ typedef struct		s_env
 	t_place_type	all_types[TT_COUNT];
 }					t_env;
 
-void				apply_type(t_env *env, char *str, t_place_type tetri);
 void				parsing_tetris(t_env *env);
 void				fillit(t_env *env);
 t_bool				check_horiz_i(char *tetri);
