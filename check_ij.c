@@ -37,5 +37,5 @@ t_bool				check_left_j(char *str)
 	while (*str != '#')
 		str++;
 	return ((str + 1) && (str + 2) && (str + 7) && *(str + 1) == '#'
-		&& *(str + 2) == '#' && *(str + 3) == '#');
+		&& *(str + 2) == '#' && *(str + 7) == '#');
 }
