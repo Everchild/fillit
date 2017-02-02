@@ -12,17 +12,17 @@
 
 #include <fillit.h>
 
-/*static void			ft_create_map(t_env *env, int nb_caract)
+static void			ft_create_map(t_env *env, int nb_caract)
 {
 	int				i;
 
 	i = -1;
 	while (++i < nb_caract)
 	{
-		if (i == t_env->side || (i > t_env->side && (i - t_env->side) % (t_env->side + 1) == 0))
-			t_env->map[i] = '\n';
+		if (i == env->side || (i > env->side && (i - env->side) % (env->side + 1) == 0))
+			env->map[i] = '\n';
 		else
-			t_env->map[i] = '.';
+			env->map[i] = '.';
 	}
 }
 
@@ -45,50 +45,51 @@ static bool	ft_backtrack(t_env *env, int nb_caract, int position, int i)
 
 	tetri = env->tetris[i];
 	if (i >= nb_tetri)
-		return (true);
+		return (TRUE);
 	while (position < nb_caract)
 	{
-		if (tetri.type.place_tetri(t_env->map, position, tetri.letter, t_env->side) == TETRI_PLACED)
+		if (tetri.type.place_tetri(env->map, position, tetri.letter, env->side) == TETRI_PLACED)
 		{
 			position++;
 			i++;
-			if (ft_backtrack(&env, &position, &i))
-				return true;
+			if (ft_backtrack(env, nb_caract, position, i))
+				return (TRUE);
 		}
 		position++;
-		if (t_env->map[position] == '\n')
+		if (env->map[position] == '\n')
 			position++;
 	}
-	ft_remove_tetri(&env, tetri, nb_caract);
-	return (false);
+	ft_remove_tetri(env, tetri, nb_caract);
+	return (FALSE);
 }
 
 static void	ft_complete_map(t_env *env)
 {
 	int				nb_caract;
 
-	t_env->side = ft_sqrt(t_env->nb_tetri * 4);
-	nb_caract = t_env->side * (t_env->side + 1);
-	if (!(t_env->map = (char *)ft_memalloc(sizeof(char) * (nb_caract + 1))))
-		return (NULL);
-	ft_create_map(&env, nb_caract);
-	while (ft_backtrack(&env, nb_caract, 0, 0) == false)  //1er 0 = position 2eme = tetri
+	env->side = ft_sqrt(env->nb_tetri * 4);
+	nb_caract = env->side * (env->side + 1);
+	if (!(env->map = (char *)ft_memalloc(sizeof(char) * (nb_caract + 1))))
+		ft_exit("error: failed to allocate memory", FAILED_TO_MALLOC);
+	ft_create_map(env, nb_caract);
+	while (ft_backtrack(env, nb_caract, 0, 0) == FALSE)
 	{
-		t_env->side++;
-		free t_env->map;
-		if (!(t_env->map = (char *)ft_memalloc(sizeof(char) * ((t_env->side * (t_env->side + 1)) + 1))))
-			return (NULL);
-		ft_create_map(&env);
-		nb_caract = t_env->side * (t_env->side + 1);
+		env->side++;
+		ft_memdel(env->map);
+		if (!(env->map = (char *)ft_memalloc(sizeof(char) * ((env->side * (env->side + 1)) + 1))))
+			ft_exit("error: failed to allocate memory", FAILED_TO_MALLOC);
+		ft_create_map(env);
+		nb_caract = env->side * (env->side + 1);
 	}
 }
-*/
+
 
 void				fillit(t_env *env)
 // sert uniquement à afficher les tetris avec leurs lettres, tu peux tout supprimer si besoin
 {
-//	ft_complete_map(&env);
-//	ft_putstr(env->map);
+	ft_complete_map(&env);
+	ft_putstr(env->map);
+/*
 	int				i;
 	int				j;
 	t_tetri			tetri;
@@ -117,4 +118,5 @@ void				fillit(t_env *env)
 			ft_putchar('\n');
 		ft_memdel((void **)&str);
 	}
+*/
 }
