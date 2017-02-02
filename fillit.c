@@ -79,6 +79,7 @@ static void	ft_complete_map(t_env *env)
 		if (!(t_env->map = (char *)ft_memalloc(sizeof(char) * ((t_env->side * (t_env->side + 1)) + 1))))
 			return (NULL);
 		ft_create_map(&env);
+		nb_caract = t_env->side * (t_env->side + 1);
 	}
 }
 */
