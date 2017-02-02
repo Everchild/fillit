@@ -52,13 +52,12 @@ static t_bool	ft_backtrack(t_env *env, int nb_caract, int i)
 	{
 		if (tetri.type.place_tetri(env->map, position, tetri.letter, env->side) == TETRI_PLACED)
 		{
-	//		i++;
-			if (ft_backtrack(env, nb_caract, i++))
+			if (ft_backtrack(env, nb_caract, i + 1))
 				return (TRUE);
+			ft_remove_tetri(env, tetri, nb_caract);
 		}
 		position++;
 	}
-	ft_remove_tetri(env, tetri, nb_caract);
 	return (FALSE);
 }
 
