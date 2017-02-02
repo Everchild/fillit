@@ -39,20 +39,20 @@ static void	ft_remove_tetri(t_env *env, t_tetri tetri, int nb_caract)
 	}
 }
 
-static bool	ft_backtrack(t_env *env, int nb_caract, int position, int i)
+static t_bool	ft_backtrack(t_env *env, int nb_caract, int position, int i)
 {
 	t_tetri		tetri;
 
 	tetri = env->tetris[i];
-	if (i >= nb_tetri)
+	if (i >= env->nb_tetris)
 		return (TRUE);
 	while (position < nb_caract)
 	{
 		if (tetri.type.place_tetri(env->map, position, tetri.letter, env->side) == TETRI_PLACED)
 		{
-			position++;
-			i++;
-			if (ft_backtrack(env, nb_caract, position, i))
+//			position++;
+//			i++;
+			if (ft_backtrack(env, nb_caract, position++, i++))
 				return (TRUE);
 		}
 		position++;
@@ -67,7 +67,7 @@ static void	ft_complete_map(t_env *env)
 {
 	int				nb_caract;
 
-	env->side = ft_sqrt(env->nb_tetri * 4);
+	env->side = ft_sqrt(env->nb_tetris * 4);
 	nb_caract = env->side * (env->side + 1);
 	if (!(env->map = (char *)ft_memalloc(sizeof(char) * (nb_caract + 1))))
 		ft_exit("error: failed to allocate memory", FAILED_TO_MALLOC);
@@ -75,10 +75,10 @@ static void	ft_complete_map(t_env *env)
 	while (ft_backtrack(env, nb_caract, 0, 0) == FALSE)
 	{
 		env->side++;
-		ft_memdel(env->map);
+		ft_memdel((void **)&env->map);
 		if (!(env->map = (char *)ft_memalloc(sizeof(char) * ((env->side * (env->side + 1)) + 1))))
 			ft_exit("error: failed to allocate memory", FAILED_TO_MALLOC);
-		ft_create_map(env);
+		ft_create_map(env, nb_caract);
 		nb_caract = env->side * (env->side + 1);
 	}
 }
@@ -87,7 +87,7 @@ static void	ft_complete_map(t_env *env)
 void				fillit(t_env *env)
 // sert uniquement à afficher les tetris avec leurs lettres, tu peux tout supprimer si besoin
 {
-	ft_complete_map(&env);
+	ft_complete_map(env);
 	ft_putstr(env->map);
 /*
 	int				i;
