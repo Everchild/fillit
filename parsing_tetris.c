@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 15:09:41 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/02/03 11:36:30 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/02/03 14:10:33 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void			register_tetris(t_env *env)
 
 	i = 0;
 	j = 0;
-	read(env->fd, env->file, MAX_CHARACTERS + 1);
+	if (!(read(env->fd, env->file, MAX_CHARACTERS + 1)))
+		ft_exit("error", INVALID_FILE);
 	if (env->file[MAX_CHARACTERS] != '\0')
 		ft_exit("error", INVALID_FILE);
 	while (env->file[i])
@@ -34,6 +35,8 @@ static void			register_tetris(t_env *env)
 				ft_exit("error", INVALID_FILE);
 			j++;
 		}
+		if (env->file[i] == '\n' && !(env->file[i + 1]))
+			ft_exit("error", INVALID_FILE);
 		i++;
 	}
 }
