@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 12:28:29 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/01/16 17:41:25 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/02/03 11:52:00 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void			init_struct(t_place_type *p, t_type_tetri type,
 
 static void			init_all_types(t_place_type *all_types)
 {
-//	t_place
-//	(*all_type++) =  ..;
 	init_struct(&all_types[0], TT_HORIZ_I, check_horiz_i, place_horiz_i);
 	init_struct(&all_types[1], TT_CLASSIC_I, check_classic_i, place_classic_i);
 	init_struct(&all_types[2], TT_CLASSIC_T, check_classic_t, place_classic_t);
@@ -43,7 +41,6 @@ static void			init_all_types(t_place_type *all_types)
 	init_struct(&all_types[16], TT_UP_S, check_up_s, place_up_s);
 	init_struct(&all_types[17], TT_LAID_Z, check_laid_z, place_laid_z);
 	init_struct(&all_types[18], TT_UP_Z, check_up_z, place_up_z);
-//	place_type yolo[TT_COUNT] = all_types; //temporary
 }
 
 static void			init_env(t_env *env, char *file)

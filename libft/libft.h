@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2016/12/14 17:48:19 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/02/03 11:50:17 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 void				*ft_memdup(const void *s, size_t n);
 void				*ft_realloc(void *ptr, size_t size);
-
 
 /*
 ** libstr

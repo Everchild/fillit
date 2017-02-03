@@ -6,13 +6,13 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 10:15:22 by drecours          #+#    #+#             */
-/*   Updated: 2017/01/30 14:25:14 by drecours         ###   ########.fr       */
+/*   Updated: 2017/02/03 11:49:27 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_sqrt(int  nb_hashtags)
+int					ft_sqrt(int nb_hashtags)
 {
-	int		result;
+	int				result;
 
 	result = 1;
 	while ((result * result) < (nb_hashtags))

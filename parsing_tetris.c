@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 15:09:41 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/01/16 17:41:31 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/02/03 11:36:30 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,19 @@ static void			register_tetris(t_env *env)
 	read(env->fd, env->file, MAX_CHARACTERS + 1);
 	if (env->file[MAX_CHARACTERS] != '\0')
 		ft_exit("error", INVALID_FILE);
-	while (env->file && env->file[i])
+	while (env->file[i])
 	{
 		if (env->file[i])
 		{
 			env->tetris[j].str = ft_strndup(env->file + i, TETRI_SIZE);
+			if (!(env->tetris[j].str))
+				ft_exit("error", FAILED_TO_MALLOC);
 			i += TETRI_SIZE;
 			if (env->file[i] && env->file[i] != '\n')
 				ft_exit("error", INVALID_FILE);
-			i++;
 			j++;
 		}
+		i++;
 	}
 }
 
