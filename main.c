@@ -13,7 +13,8 @@
 #include <fillit.h>
 
 static void			init_struct(t_place_type *p, t_type_tetri type,
-						t_check_type_fn check_type, t_place_type_fn place_type)
+						t_check_type_fct check_type,
+						t_place_type_fct place_type)
 {
 	p->type = type;
 	p->check_type = check_type;
@@ -50,7 +51,7 @@ static void			init_env(t_env *env, char *file)
 	i = 0;
 	env->fd = open(file, O_RDONLY);
 	if (env->fd == FAILED_TO_OPEN)
-		ft_exit("error: failed to open the file", FAILED_TO_OPEN);
+		ft_exit("error", FAILED_TO_OPEN);
 	ft_bzero(env->file, MAX_CHARACTERS + 1);
 	while (i <= MAX_TETRIMINOS)
 	{

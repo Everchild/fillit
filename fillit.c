@@ -12,12 +12,12 @@
 
 #include <fillit.h>
 
-static void			ft_create_map(t_env *env, int nb_caract)
+static void			ft_init_map(t_env *env, int size_map)
 {
 	int				i;
 
 	i = -1;
-	while (++i < nb_caract)
+	while (++i < size_map)
 	{
 		if (i == env->side
 			|| (i > env->side && (i - env->side) % (env->side + 1) == 0))
@@ -27,12 +27,12 @@ static void			ft_create_map(t_env *env, int nb_caract)
 	}
 }
 
-static void			ft_remove_tetri(t_env *env, t_tetri tetri, int nb_caract)
+static void			ft_remove_tetri(t_env *env, t_tetri tetri, int size_map)
 {
 	int				i;
 
 	i = 0;
-	while (i < nb_caract)
+	while (i < size_map)
 	{
 		if (env->map[i] == tetri.letter)
 			env->map[i] = '.';
@@ -40,7 +40,7 @@ static void			ft_remove_tetri(t_env *env, t_tetri tetri, int nb_caract)
 	}
 }
 
-static t_bool		ft_backtrack(t_env *env, int nb_caract, int i)
+static t_bool		ft_backtrack(t_env *env, int size_map, int i)
 {
 	t_tetri			tetri;
 	int				position;
@@ -49,14 +49,14 @@ static t_bool		ft_backtrack(t_env *env, int nb_caract, int i)
 	position = 0;
 	if (i >= env->nb_tetris)
 		return (TRUE);
-	while (position < nb_caract)
+	while (position < size_map)
 	{
 		if (tetri.type.place_tetri(env->map, position, tetri.letter, env->side)
 			== TETRI_PLACED)
 		{
-			if (ft_backtrack(env, nb_caract, i + 1))
+			if (ft_backtrack(env, size_map, i + 1))
 				return (TRUE);
-			ft_remove_tetri(env, tetri, nb_caract);
+			ft_remove_tetri(env, tetri, size_map);
 		}
 		position++;
 	}
@@ -65,21 +65,21 @@ static t_bool		ft_backtrack(t_env *env, int nb_caract, int i)
 
 void				fillit(t_env *env)
 {
-	int				nb_caract;
+	int				size_map;
 
 	env->side = ft_sqrt(env->nb_tetris * 4);
-	nb_caract = env->side * (env->side + 1);
-	if (!(env->map = (char *)ft_memalloc(sizeof(char) * (nb_caract + 1))))
+	size_map = env->side * (env->side + 1);
+	if (!(env->map = (char *)ft_memalloc(sizeof(char) * (size_map + 1))))
 		ft_exit("error", FAILED_TO_MALLOC);
-	ft_create_map(env, nb_caract);
-	while (ft_backtrack(env, nb_caract, 0) == FALSE)
+	ft_init_map(env, size_map);
+	while (!ft_backtrack(env, size_map, 0))
 	{
 		env->side++;
 		ft_memdel((void **)&env->map);
-		if (!(env->map = (char *)ft_memalloc(sizeof(char) * (nb_caract + 1))))
+		if (!(env->map = (char *)ft_memalloc(sizeof(char) * (size_map + 1))))
 			ft_exit("error", FAILED_TO_MALLOC);
-		nb_caract = env->side * (env->side + 1);
-		ft_create_map(env, nb_caract);
+		size_map = env->side * (env->side + 1);
+		ft_init_map(env, size_map);
 	}
 	ft_putstr(env->map);
 }

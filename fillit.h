@@ -22,8 +22,7 @@
 # define HASHTAG_PER_TETRI 4
 # define TETRI_SIZE 20
 
-# define TETRI_PLACED 4
-# define MAP_TOO_SMALL 3
+# define TETRI_PLACED 3
 # define INVALID_PLACEMENT 2
 
 # define E_SUCCESS 1
@@ -55,8 +54,8 @@ typedef enum		e_type_tetri
 	TT_COUNT
 }					t_type_tetri;
 
-typedef t_bool		(*t_check_type_fn)(char *);
-typedef int			(*t_place_type_fn)(char *, int, char c, int side);
+typedef t_bool		(*t_check_type_fct)(char *);
+typedef int			(*t_place_type_fct)(char *, int, char c, int side);
 
 typedef struct		s_place_type
 {
